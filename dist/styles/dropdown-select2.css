@@ -1,0 +1,15 @@
+.dropdown-input {
+  font-size: 20px;
+  margin: .2px 0 1px;
+  padding: .25px;
+  width: 100%; }
+  .dropdown-input:focus .dropdown-content {
+    display: inline-block; }
+
+.dropdown-content {
+  overflow: scroll;
+  padding: 5px;
+  overflow-x: hidden;
+  height: 100px;
+  display: inline-block;
+  line-height: 3em; }

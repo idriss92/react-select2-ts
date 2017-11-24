@@ -1,0 +1,88 @@
+$bg: #987;
+$text: lighten($bg,35%);
+
+// $input: "input[type=text]"; 
+
+
+// input
+//     & [type='text']
+        // @extend .roundedborder
+.dropdown-input  {
+        font-size: 20px;
+        margin: .2px 0 1px;
+        padding: .25px;
+        width: 100%;
+        // background-color: darken($bg, 5%);
+        // color: lighten($text, 10%);
+
+        &:focus {
+            .dropdown-content {
+                display: inline-block;
+            }
+        }
+}
+
+// .dropdown{
+//     display: inline-block;
+//     position: relative;
+//     border: 1px solid;
+//     border-radius: 3px;
+//     border-color: white;
+//     height: 28px;
+//     width: 150px;
+//     overflow: hidden;
+
+//     &::before, &::after{
+//         position: absolute
+//     }
+
+//     &:focus{
+
+//     }
+// }
+
+
+
+.dropdown-content{
+    overflow:scroll;
+    padding: 5px;
+    overflow-x:hidden;
+    height: 100px;
+    display: inline-block;
+    // overflow: auto;
+    // width: 100px;
+    line-height: 3em
+    // height: 300px;
+    // overflow-x: hidden;
+    // overflow: scroll;
+    // display: none;
+    // position: absolute;
+    // min-width: 160px;
+    // z-index: 1;
+}
+// .dropdown-content
+//     option
+//         padding: 12px 16px
+//         display: block
+//         text-decoration: none
+
+// .dropdown-content
+//     option:hover
+//         background-color: #f1f1f1
+
+// .dropdown
+//     position: relative
+//     display: inline-block
+
+// .dropdown:hover
+//     .dropdown-content
+//         display: block
+
+// .inputEl
+//     background-color: #4caf50
+//     color: white
+//     padding: 16px
+//     font-size: 16px
+//     border: none
+//     cursor: pointer;
+

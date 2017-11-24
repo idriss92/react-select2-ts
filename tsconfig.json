@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "allowJs": false,
+        "declaration": true,
+        "importHelpers": true,
+        "inlineSourceMap": true,
+        "lib": [
+            "es2015",
+            "dom"
+        ],
+        "strict": true,
+        "module": "commonjs",
+        "noImplicitAny": false,
+        "noUnusedLocals": true,
+        "outDir": "dist",
+        "preserveConstEnums": true,
+        "rootDir": "src",
+        "target": "es5",
+        "typeRoots": [
+            "./node_modules/@types"
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
