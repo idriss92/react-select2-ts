@@ -1,43 +1,46 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var tslib_1 = require("tslib");
-var React = require("react");
-var $ = require("jquery");
-require("select2");
-require("select2/dist/css/select2.min.css");
-require("./index");
-var _ = require("lodash");
-var Select = (function (_super) {
-    tslib_1.__extends(Select, _super);
-    function Select(props) {
-        return _super.call(this, props) || this;
-    }
-    Select.prototype.componentDidMount = function () {
-        this.initilizeConf();
-    };
-    Select.prototype.renderOptions = function () {
-        var data = this.props.data;
-        return _.map(data, function (x) {
-            return React.createElement("option", { key: x.id, value: x.id }, x.text);
-        });
-    };
-    Select.prototype.initilizeConf = function () {
-        var _a = this.props, uniqueName = _a.uniqueName, placeholder = _a.placeholder, data = _a.data, searchable = _a.searchable;
-        if (searchable) {
-            $("#" + uniqueName).select2({
-                placeholder: placeholder,
-                data: data,
-                theme: 'classic'
-            });
-        }
-    };
-    Select.prototype.render = function () {
-        var _a = this.props, data = _a.data, className = _a.className, uniqueName = _a.uniqueName, searchable = _a.searchable;
-        if (!searchable && data.length > 0) {
-            return (React.createElement("select", { className: className, name: uniqueName, id: uniqueName }, this.renderOptions()));
-        }
-        return (React.createElement("select", { className: className, name: uniqueName, id: uniqueName }));
-    };
-    return Select;
-}(React.Component));
-exports.Select = Select;
+// import * as React from 'react';
+// import * as $ from 'jquery';
+// import 'select2';
+// import 'select2/dist/css/select2.min.css';
+// import './index'
+// import * as _ from 'lodash';
+// import { SelectProperties } from '../common';
+// export class Select extends React.Component<SelectProperties, {}>{
+//     constructor(props: SelectProperties) {
+//         super(props);
+//     }
+//     componentDidMount() {
+//         this.initilizeConf();
+//     }
+//     renderOptions() {
+//         const { data } = this.props;
+//         return _.map(data, x => {
+//             return <option key={x.id} value={x.id}>{x.text}</option>
+//         });
+//     }
+//     initilizeConf() {
+//         const { uniqueName, placeholder, data, searchable } = this.props;
+//         if (searchable) {
+//             $(`#${uniqueName}`).select2({
+//                 placeholder: placeholder,
+//                 data: data,
+//                 theme: 'classic'
+//             });
+//         }
+//     }
+//     render() {
+//         const { data, className, uniqueName, searchable } = this.props;
+//         if (!searchable && data.length > 0) {
+//             return (
+//                 <select className={className} name={uniqueName} id={uniqueName}>
+//                     {this.renderOptions()}
+//                 </select>
+//             )
+//         }
+//         return (
+//             <select className={className} name={uniqueName} id={uniqueName}>
+//             </select>
+//         )
+//     }
+// } 

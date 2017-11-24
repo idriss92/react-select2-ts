@@ -1,9 +1,9 @@
 {
   "name": "react-select2-ts",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "main": "dist/index.js",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "scripts": {
     "test": "gulp && yarn test:unit",
     "test:unit": "yarn install && ava dist/tests",

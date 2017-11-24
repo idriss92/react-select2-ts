@@ -20,7 +20,7 @@ export interface Select2Properties {
     language: string;
     loadOptions?:any;
     clickHandler: (event: any) => void;
-    httpCall:(inputValue: any) => Promise<any>;
+    httpCall:(inputValue: any) => Promise<{data: JSonResult[]}>;
     // defaultHttpCallValue: any;
 }
 
@@ -33,13 +33,8 @@ export interface Select2State{
     typingTimeOut: number;
 }
 
-
-export interface OptionsProps{
-    options: JSonResult[];
-}
-
 export interface SelectProperties {
-    data: JSonResult[];
+    data: IJSonResult[];
     placeholder: string;
     className: string;
     uniqueName: string;

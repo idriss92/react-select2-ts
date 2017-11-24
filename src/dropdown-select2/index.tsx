@@ -2,6 +2,7 @@ import * as React from 'react';
 import '../styles/dropdown-select2.css';
 import * as  _ from 'lodash';
 import { Select2Properties, Select2State, JSonResult } from '../common';
+import Throttler from './Throttler'
 
 const initialState: Select2State = {
     defaultHttpCallValue: '',
@@ -12,10 +13,15 @@ const initialState: Select2State = {
     data: [{ id: 0, selected: false, text: 'hello' } as JSonResult, { id: 1, selected: false, text: 'hello' } as JSonResult, { id: 2, selected: false, text: 'hello' } as JSonResult, { id: 3, selected: false, text: 'hello' } as JSonResult]
 }
 
+
+const WAIT_INTERVAL = 500;
 export class Select2 extends React.Component<Select2Properties, Select2State>{
+    inputThrottler: Throttler;
+
     constructor(props: Select2Properties) {
         super(props);
         this.state = initialState;
+        this.inputThrottler = new Throttler(WAIT_INTERVAL);
         this.onChangeInput = this.onChangeInput.bind(this);
     }
 
@@ -33,18 +39,24 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
         );
     }
 
-    callAjax() {
-        console.log('callAjax ' + this.state.defaultHttpCallValue)
-        this.props.httpCall(this.state.defaultHttpCallValue);
-    }
+    // callAjax() {
+    //     console.log('callAjax ' + this.state.defaultHttpCallValue)
+    //     this.props.httpCall(this.state.defaultHttpCallValue)
+    //         .then(
+    //             x=> console.log(x.data)
+    //         )
+    // }
 
-    onChangeInput(event: any) {
-        let value: string = event.target.value;
+    onChangeInput(event: React.SyntheticEvent<HTMLInputElement>) {
+        let value: string = event.currentTarget.value;
         this.setState({ defaultHttpCallValue: value });
-        if(value.length >= 3){
-            this.props.httpCall(value);
-            console.log(value)
-        }
+        this.inputThrottler.throttle(() => {
+            this.props.httpCall(value)
+                .then(x=>{
+                    console.log(x.data);
+                    // this.setState({ data: x.data });
+                });
+        });
     }
 
 

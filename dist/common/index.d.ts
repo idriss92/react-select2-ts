@@ -12,14 +12,16 @@ export interface Select2Properties {
     allowClearButton?: boolean;
     id: string;
     placeholder?: string;
-    className?: string;
+    className: string;
     minimumInputLength?: number;
     maximumInputLength?: number;
     maximumSelectionLength?: number;
-    language?: string;
+    language: string;
     loadOptions?: any;
-    clickHandler?: (event: any) => void;
-    httpCall: (inputValue: any) => Promise<IJSonResult[]>;
+    clickHandler: (event: any) => void;
+    httpCall: (inputValue: any) => Promise<{
+        data: JSonResult[];
+    }>;
 }
 export interface Select2State {
     showingStyle: number;
@@ -29,11 +31,8 @@ export interface Select2State {
     isTyping: boolean;
     typingTimeOut: number;
 }
-export interface OptionsProps {
-    options: JSonResult[];
-}
 export interface SelectProperties {
-    data: JSonResult[];
+    data: IJSonResult[];
     placeholder: string;
     className: string;
     uniqueName: string;

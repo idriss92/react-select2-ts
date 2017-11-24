@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var JSonResult = (function () {
+var JSonResult = /** @class */ (function () {
     function JSonResult() {
     }
     return JSonResult;
