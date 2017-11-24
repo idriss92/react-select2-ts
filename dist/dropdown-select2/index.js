@@ -20,22 +20,25 @@ var Select2 = (function (_super) {
         _this.onChangeInput = _this.onChangeInput.bind(_this);
         return _this;
     }
-    Select2.prototype.componentDidUpdate = function () {
-        this.callAjax();
-    };
+    // componentDidUpdate() {
+    //     this.callAjax();
+    // }
     Select2.prototype.renderOptions = function (data) {
-        return (React.createElement("div", { className: "dropdown-content" },
-            React.createElement("ul", null, _.map(data).map(function (x) {
-                return React.createElement("option", { value: x.id, key: x.id }, x.text);
-            }))));
+        return (React.createElement("div", { className: "dropdown-content" }, _.map(data).map(function (x) {
+            return React.createElement("option", { value: x.id, key: x.id }, x.text);
+        })));
     };
     Select2.prototype.callAjax = function () {
         console.log('callAjax ' + this.state.defaultHttpCallValue);
-        this.props.httpCall(this.state.defaultHttpCallValue).then(function () { return console.log('helo'); });
+        this.props.httpCall(this.state.defaultHttpCallValue);
     };
     Select2.prototype.onChangeInput = function (event) {
-        console.log(event.target.value);
-        this.setState({ defaultHttpCallValue: event.target.value });
+        var value = event.target.value;
+        this.setState({ defaultHttpCallValue: value });
+        if (value.length >= 3) {
+            this.props.httpCall(value);
+            console.log(value);
+        }
     };
     Select2.prototype.render = function () {
         var _a = this.props, id = _a.id, placeholder = _a.placeholder;

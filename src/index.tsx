@@ -1,2 +1,4 @@
-export * from './dropdown-select2'
-export * from './dropdown-select'
+import {Select2} from './dropdown-select2'
+import {Select} from './dropdown-select'
+import {IJSonResult,JSonResult} from './common'
+export {Select2, Select, IJSonResult, JSonResult};
