@@ -30,6 +30,7 @@ export interface Select2State {
     httpCallInput: string;
     isTyping: boolean;
     typingTimeOut: number;
+    hideUl: boolean;
 }
 export interface SelectProperties {
     data: IJSonResult[];
