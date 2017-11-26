@@ -1,15 +1,27 @@
 .dropdown-input {
-  font-size: 20px;
-  margin: .2px 0 1px;
-  padding: .25px;
-  width: 100%; }
-  .dropdown-input:focus .dropdown-content {
-    display: inline-block; }
+  background-image: url("../images/searchicon.png");
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  width: 100%;
+  border: 1px solid #ddd; }
 
 .dropdown-content {
-  overflow: scroll;
-  padding: 5px;
-  overflow-x: hidden;
-  height: 100px;
-  display: inline-block;
-  line-height: 3em; }
+  list-style-type: circle;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  height: auto;
+  overflow: auto; }
+  .dropdown-content .dropdown-line .dropdown-line-content {
+    border: 1px solid #ddd;
+    margin-top: -1px;
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block; }
+    .dropdown-content .dropdown-line .dropdown-line-content:hover:not(.header) {
+      background-color: #eee; }

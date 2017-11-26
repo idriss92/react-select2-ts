@@ -1,11 +1,10 @@
 import * as React from 'react';
 import '../styles/dropdown-select2.css';
-import * as  _ from 'lodash';
 import { Select2Properties, Select2State, JSonResult } from '../common';
 import Throttler from './Throttler'
 
 const initialState: Select2State = {
-    defaultHttpCallValue: '',
+    httpCallInput: '',
     isTyping: false,
     showingStyle: 1,
     selectedValue: '',
@@ -25,18 +24,23 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
         this.onChangeInput = this.onChangeInput.bind(this);
     }
 
-    // componentDidUpdate() {
-    //     this.callAjax();
-    // }
-
     renderOptions(data: JSonResult[]) {
+        if ( data != null &&  data.length > 0) {
+            return (
+                <ul className="dropdown-content">
+                    {data.map((item, index) => {
+                        return <li key={index} className="dropdown-line"><a className="dropdown-line-content" href="#">{item.text}</a></li>
+                    })}
+
+                </ul>
+            );
+        }
         return (
-            <div className="dropdown-content">
-                {_.map(data).map(x => {
-                    return <option value={x.id} key={x.id}>{x.text}</option>
-                })}
-            </div>
-        );
+            <ul className="dropdown-content">
+                <li className="dropdown-line"><a className="dropdown-line-content">No results founds</a></li>
+            </ul>)
+        ;
+
     }
 
     // callAjax() {
@@ -49,12 +53,12 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
 
     onChangeInput(event: React.SyntheticEvent<HTMLInputElement>) {
         let value: string = event.currentTarget.value;
-        this.setState({ defaultHttpCallValue: value });
+        this.setState({ httpCallInput: value });
         this.inputThrottler.throttle(() => {
             this.props.httpCall(value)
-                .then(x=>{
+                .then(x => {
                     console.log(x.data);
-                    // this.setState({ data: x.data });
+                    this.setState({ data: x.data });
                 });
         });
     }
@@ -68,7 +72,7 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
         else if (this.state.showingStyle === 1) {
             return (
                 <div className="dropdown">
-                    <input className="dropdown-input" placeholder={placeholder} name={id} type="text" value={this.state.defaultHttpCallValue} onChange={this.onChangeInput} />
+                    <input className="dropdown-input" placeholder={placeholder} name={id} type="text" value={this.state.httpCallInput} onChange={this.onChangeInput} />
                     {this.renderOptions(this.state.data)}
                 </div>
             );

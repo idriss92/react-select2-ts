@@ -3,10 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var React = require("react");
 require("../styles/dropdown-select2.css");
-var _ = require("lodash");
 var Throttler_1 = require("./Throttler");
 var initialState = {
-    defaultHttpCallValue: '',
+    httpCallInput: '',
     isTyping: false,
     showingStyle: 1,
     selectedValue: '',
@@ -14,7 +13,7 @@ var initialState = {
     data: [{ id: 0, selected: false, text: 'hello' }, { id: 1, selected: false, text: 'hello' }, { id: 2, selected: false, text: 'hello' }, { id: 3, selected: false, text: 'hello' }]
 };
 var WAIT_INTERVAL = 500;
-var Select2 = /** @class */ (function (_super) {
+var Select2 = (function (_super) {
     tslib_1.__extends(Select2, _super);
     function Select2(props) {
         var _this = _super.call(this, props) || this;
@@ -23,13 +22,16 @@ var Select2 = /** @class */ (function (_super) {
         _this.onChangeInput = _this.onChangeInput.bind(_this);
         return _this;
     }
-    // componentDidUpdate() {
-    //     this.callAjax();
-    // }
     Select2.prototype.renderOptions = function (data) {
-        return (React.createElement("div", { className: "dropdown-content" }, _.map(data).map(function (x) {
-            return React.createElement("option", { value: x.id, key: x.id }, x.text);
-        })));
+        if (data != null && data.length > 0) {
+            return (React.createElement("ul", { className: "dropdown-content" }, data.map(function (item, index) {
+                return React.createElement("li", { key: index, className: "dropdown-line" },
+                    React.createElement("a", { className: "dropdown-line-content", href: "#" }, item.text));
+            })));
+        }
+        return (React.createElement("ul", { className: "dropdown-content" },
+            React.createElement("li", { className: "dropdown-line" },
+                React.createElement("a", { className: "dropdown-line-content" }, "No results founds"))));
     };
     // callAjax() {
     //     console.log('callAjax ' + this.state.defaultHttpCallValue)
@@ -41,12 +43,12 @@ var Select2 = /** @class */ (function (_super) {
     Select2.prototype.onChangeInput = function (event) {
         var _this = this;
         var value = event.currentTarget.value;
-        this.setState({ defaultHttpCallValue: value });
+        this.setState({ httpCallInput: value });
         this.inputThrottler.throttle(function () {
             _this.props.httpCall(value)
                 .then(function (x) {
                 console.log(x.data);
-                // this.setState({ data: x.data });
+                _this.setState({ data: x.data });
             });
         });
     };
@@ -57,7 +59,7 @@ var Select2 = /** @class */ (function (_super) {
         }
         else if (this.state.showingStyle === 1) {
             return (React.createElement("div", { className: "dropdown" },
-                React.createElement("input", { className: "dropdown-input", placeholder: placeholder, name: id, type: "text", value: this.state.defaultHttpCallValue, onChange: this.onChangeInput }),
+                React.createElement("input", { className: "dropdown-input", placeholder: placeholder, name: id, type: "text", value: this.state.httpCallInput, onChange: this.onChangeInput }),
                 this.renderOptions(this.state.data)));
         }
         return (React.createElement("div", null));

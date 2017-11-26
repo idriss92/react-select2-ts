@@ -28,7 +28,7 @@ export interface Select2State{
     showingStyle: number;
     data: JSonResult[];
     selectedValue: string;
-    defaultHttpCallValue: string;
+    httpCallInput: string;
     isTyping: boolean;
     typingTimeOut: number;
 }
