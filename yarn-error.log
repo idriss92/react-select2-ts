@@ -16,8 +16,12 @@ Platform:
 npm manifest: 
   {
     "name": "react-select2-ts",
-    "version": "1.0.7",
+    "version": "1.1.9",
     "main": "dist/index.js",
+    "repository": {
+      "url": "https://github.com/idriss92/react-select2-ts.git",
+      "type": "git"
+    },
     "license": "MIT",
     "private": false,
     "scripts": {
@@ -25,14 +29,16 @@ npm manifest:
       "test:unit": "yarn install && ava dist/tests",
       "test:watch": "ava --watch dist/tests",
       "build": "gulp",
-      "watch": "gulp watch"
+      "build:watch": "gulp watch",
+      "cover": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha",
+      "coveralls": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha && cat coverage/lcov.info | coveralls",
+      "lint": ""
     },
     "typings": "dist/index.d.ts",
     "files": [
       "dist/"
     ],
     "dependencies": {
-      "@types/lodash": "^4.14.80",
       "es6-promise": "^4.1.1",
       "lodash": "^4.17.4",
       "tslib": "^1.8.0"
@@ -40,10 +46,12 @@ npm manifest:
     "devDependencies": {
       "@types/enzyme": "^3.1.1",
       "@types/jquery": "^3.2.15",
+      "@types/lodash": "^4.14.80",
       "@types/react": "16",
       "@types/react-dom": "16",
       "@types/select2": "^4.0.41",
       "ava": "^0.23.0",
+      "cross-env": "^5.1.1",
       "del": "^3.0.0",
       "enzyme": "^3.1.0",
       "enzyme-adapter-react-16": "^1.0.2",
@@ -59,7 +67,12 @@ npm manifest:
       "react-test-renderer": "^16.0.0",
       "select2": "^4.0.6-rc.0",
       "typescript": "^2.4.2"
-    }
+    },
+    "keywords": [
+      "input",
+      "react-component",
+      "select"
+    ]
   }
 
 yarn manifest: 
@@ -1193,6 +1206,13 @@ Lockfile:
     dependencies:
       capture-stack-trace "^1.0.0"
   
+  cross-env@^5.1.1:
+    version "5.1.1"
+    resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.1.1.tgz#b6d8ab97f304c0f71dae7277b75fe424c08dfa74"
+    dependencies:
+      cross-spawn "^5.1.0"
+      is-windows "^1.0.0"
+  
   cross-spawn@^3.0.0:
     version "3.0.1"
     resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-3.0.1.tgz#1256037ecb9f0c5f79e3d6ef135e30770184b982"
@@ -1200,7 +1220,7 @@ Lockfile:
       lru-cache "^4.0.1"
       which "^1.2.9"
   
-  cross-spawn@^5.0.1:
+  cross-spawn@^5.0.1, cross-spawn@^5.1.0:
     version "5.1.0"
     resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
     dependencies:
@@ -2893,6 +2913,10 @@ Lockfile:
   is-windows@^0.2.0:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/is-windows/-/is-windows-0.2.0.tgz#de1aa6d63ea29dd248737b69f1ff8b8002d2108c"
+  
+  is-windows@^1.0.0:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/is-windows/-/is-windows-1.0.1.tgz#310db70f742d259a16a369202b51af84233310d9"
   
   is-zip@^1.0.0:
     version "1.0.0"

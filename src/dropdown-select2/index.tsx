@@ -10,7 +10,7 @@ const initialState: Select2State = {
     showingStyle: 1,
     selectedValue: '',
     typingTimeOut: 0,
-    data: [{ id: 0, selected: false, text: 'hello1' } as JSonResult, { id: 1, selected: false, text: 'hello2' } as JSonResult, { id: 2, selected: false, text: 'hello3' } as JSonResult, { id: 3, selected: false, text: 'hello4' } as JSonResult]
+    data:[]
 }
 
 const WAIT_INTERVAL = 500;
@@ -28,14 +28,15 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
         this.onBlur = this.onBlur.bind(this);
     }
 
-
     onChangeInput(event: React.SyntheticEvent<HTMLInputElement>) {
+        const {httpCall, minimumInputLength } = this.props;
+        console.log('onChange input event');
         let target = event.currentTarget;
         let value: string = target.value;
         this.setState({ httpCallInput: value });
         this.inputThrottler.throttle(() => {
-            if (value.length > 0) {
-                this.props.httpCall(value)
+            if (value.trim().length >= minimumInputLength) {
+                httpCall(value)
                 .then(x => {
                     console.log(x.data);
                     this.setState({ data: x.data });
@@ -45,18 +46,21 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
     }
 
     onClick(event: React.SyntheticEvent<HTMLAnchorElement>) {
-        // console.log(event.currentTarget.text);
-        let httpCallInput = event.currentTarget.text;
+        console.log('onClick')
+        console.log(event.currentTarget.text);
+        let httpCallInput = event.currentTarget.text; 
         this.setState({ httpCallInput });
+        this.props.onOptionsClick(event);
+        // this.props.clickHandler(event)
     }
 
     onFocus(event: React.SyntheticEvent<HTMLDivElement>) {
-        // console.log('onFocus event is launched');
+        console.log('onFocus event is launched');
         this.setState({ hideUl: false });
     }
 
     onBlur(event: React.SyntheticEvent<HTMLDivElement>) {
-        // console.log('onBlur event is launched');
+         console.log('onBlur event is launched');
         this.setState({ hideUl: true });
     }
 
@@ -67,7 +71,6 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
                     {data.map((item, index) => {
                         return <li key={index} className="dropdown-line"><a className="dropdown-line-content" href="#" onClick={this.onClick}>{item.text}</a></li>
                     })}
-
                 </ul>
             );
         }
@@ -76,22 +79,21 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
                 <li className="dropdown-line"><a className="dropdown-line-content">No results founds</a></li>
             </ul>)
             ;
-
     }
 
     render(): JSX.Element {
-        const { id, placeholder } = this.props;
+        const { id, placeholder, className } = this.props;
         if (this.state.data == undefined || this.state.data.length == 0) {
             return (
-                <div className="dropdown" onFocus={this.onFocus} onBlur={this.onBlur}>
-                    <input className="dropdown-input" type="text" id={id} placeholder={placeholder} />
+                <div className={className} onFocus={this.onFocus} onBlur={this.onBlur}>
+                    <input className="dropdown-input" type="text" name={id} id={id} placeholder={placeholder} value={this.state.httpCallInput} onChange={this.onChangeInput} />
                 </div>
             )
         }
         else if (this.state.data.length > 0) {
             return (
-                <div className="dropdown" onFocus={this.onFocus} onBlur={this.onBlur}>
-                    <input className="dropdown-input" placeholder={placeholder} name={id} type="text" value={this.state.httpCallInput} onChange={this.onChangeInput} /* onFocus={this.onFocus} onBlur={this.onBlur} */ />
+                <div className={className} onFocus={this.onFocus} onBlur={this.onBlur}>
+                    <input className="dropdown-input" placeholder={placeholder} name={id} id={id} type="text" value={this.state.httpCallInput} onChange={this.onChangeInput} />
                     {this.renderOptions(this.state.data)}
                 </div>
             );

@@ -1,6 +1,6 @@
 {
   "name": "react-select2-ts",
-  "version": "1.1.8",
+  "version": "1.3.0",
   "main": "dist/index.js",
   "repository": {
     "url": "https://github.com/idriss92/react-select2-ts.git",
@@ -28,9 +28,9 @@
     "tslib": "^1.8.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.80",
     "@types/enzyme": "^3.1.1",
     "@types/jquery": "^3.2.15",
+    "@types/lodash": "^4.14.80",
     "@types/react": "16",
     "@types/react-dom": "16",
     "@types/select2": "^4.0.41",

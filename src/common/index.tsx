@@ -12,16 +12,17 @@ export interface Select2Properties {
     isMultiple?: boolean;
     allowClearButton?: boolean;
     id: string;
-    placeholder?: string;
-    className: string;
-    minimumInputLength?: number;
+    placeholder: string;
+    className?: string;
+    minimumInputLength: number;
     maximumInputLength?: number;
     maximumSelectionLength?: number;
     language: string;
-    loadOptions?:any;
-    clickHandler: (event: any) => void;
+    selectedValue?: string;
+    // clickHandler?: (event: any) => void;
+    onOptionsClick:(event: React.SyntheticEvent<HTMLAnchorElement>) => void;
+    onSelect?:(event: any) => void;
     httpCall:(inputValue: any) => Promise<{data: JSonResult[]}>;
-    // defaultHttpCallValue: any;
 }
 
 export interface Select2State{
