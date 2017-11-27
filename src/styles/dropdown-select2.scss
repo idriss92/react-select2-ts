@@ -3,13 +3,21 @@ $text: lighten($bg, 35%);
 $easingName: 'easeInSine';
 
 .dropdown-input {
-    background-image: url('../images/searchicon.png');
-    background-position: 10px 12px;
-    background-repeat: no-repeat;
-    font-size: 16px; // margin: .2px 0 1px;
-    padding: 12px 20px 12px 40px;
+    // background-image: url('../images/searchicon.png');
+    // background-position: 10px 12px;
+    // background-repeat: no-repeat;
+    background-image: none;
+    background-color: #fff;
+    display: block;
+    color: #555;
+    height: 34px;
     width: 100%;
-    border: 1px solid #ddd; // space after the input
+    font-size: 14px; // margin: .2px 0 1px;
+    padding: 6px 12px; //12px 20px 12px 40px;
+    width: 100%;
+    line-height: 1.42857143;
+    border: 1px solid #ccc; // space after the input
+    border-radius: 4px;
 }
 
 // .dropdown{
@@ -45,13 +53,15 @@ $easingName: 'easeInSine';
 //     // z-index: 1;
 // }
 .dropdown-content {
-
-    list-style-type: circle;
+    list-style: none;
     padding: 0;
     margin: 0;
-    // height: auto;
-    // height: auto;
-    // overflow: auto;
+    position: fixed;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 200px;
+    width: 243px;
+    z-index: 2;
     .dropdown-line {
         .dropdown-line-content {
             border: 1px solid #ddd;
@@ -59,7 +69,8 @@ $easingName: 'easeInSine';
             background-color: #f6f6f6;
             padding: 12px;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 14px;
+            // height: 34px;
             color: black;
             display: block;
             &:hover:not(.header) {

@@ -4,7 +4,7 @@ import { Select2Properties, Select2State, JSonResult } from '../common';
 import Throttler from './Throttler'
 
 const initialState: Select2State = {
-    hideUl: true,
+    hideUl: false,
     httpCallInput: '',
     isTyping: false,
     showingStyle: 1,
@@ -55,13 +55,13 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
     }
 
     onFocus(event: React.SyntheticEvent<HTMLDivElement>) {
-        console.log('onFocus event is launched');
-        this.setState({ hideUl: false });
+        // console.log('onFocus event is launched');
+        // this.setState({ hideUl: false });
     }
 
     onBlur(event: React.SyntheticEvent<HTMLDivElement>) {
-         console.log('onBlur event is launched');
-        this.setState({ hideUl: true });
+        //  console.log('onBlur event is launched');
+        // this.setState({ hideUl: true });
     }
 
     renderOptions(data: JSonResult[]) {
@@ -81,12 +81,12 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
             ;
     }
 
-    render(): JSX.Element {
+    render() {
         const { id, placeholder, className } = this.props;
         if (this.state.data == undefined || this.state.data.length == 0) {
             return (
                 <div className={className} onFocus={this.onFocus} onBlur={this.onBlur}>
-                    <input className="dropdown-input" type="text" name={id} id={id} placeholder={placeholder} value={this.state.httpCallInput} onChange={this.onChangeInput} />
+                    <input className="dropdown-input" role="combobox" type="text" name={id} id={id} placeholder={placeholder} value={this.state.httpCallInput} onChange={this.onChangeInput} />
                 </div>
             )
         }

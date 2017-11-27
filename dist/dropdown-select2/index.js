@@ -5,7 +5,7 @@ var React = require("react");
 require("../styles/dropdown-select2.css");
 var Throttler_1 = require("./Throttler");
 var initialState = {
-    hideUl: true,
+    hideUl: false,
     httpCallInput: '',
     isTyping: false,
     showingStyle: 1,
@@ -52,12 +52,12 @@ var Select2 = (function (_super) {
         // this.props.clickHandler(event)
     };
     Select2.prototype.onFocus = function (event) {
-        console.log('onFocus event is launched');
-        this.setState({ hideUl: false });
+        // console.log('onFocus event is launched');
+        // this.setState({ hideUl: false });
     };
     Select2.prototype.onBlur = function (event) {
-        console.log('onBlur event is launched');
-        this.setState({ hideUl: true });
+        //  console.log('onBlur event is launched');
+        // this.setState({ hideUl: true });
     };
     Select2.prototype.renderOptions = function (data) {
         var _this = this;
@@ -75,7 +75,7 @@ var Select2 = (function (_super) {
         var _a = this.props, id = _a.id, placeholder = _a.placeholder, className = _a.className;
         if (this.state.data == undefined || this.state.data.length == 0) {
             return (React.createElement("div", { className: className, onFocus: this.onFocus, onBlur: this.onBlur },
-                React.createElement("input", { className: "dropdown-input", type: "text", name: id, id: id, placeholder: placeholder, value: this.state.httpCallInput, onChange: this.onChangeInput })));
+                React.createElement("input", { className: "dropdown-input", role: "combobox", type: "text", name: id, id: id, placeholder: placeholder, value: this.state.httpCallInput, onChange: this.onChangeInput })));
         }
         else if (this.state.data.length > 0) {
             return (React.createElement("div", { className: className, onFocus: this.onFocus, onBlur: this.onBlur },
