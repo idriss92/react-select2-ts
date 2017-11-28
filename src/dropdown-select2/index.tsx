@@ -1,14 +1,14 @@
 import * as React from 'react';
 import '../styles/dropdown-select2.css';
 import { Select2Properties, Select2State, JSonResult } from '../common';
-import Throttler from './Throttler'
+import Throttler from './Throttler';
 
 const initialState: Select2State = {
     hideUl: false,
-    httpCallInput: '',
+    inputValue: '',
     isTyping: false,
     showingStyle: 1,
-    selectedValue: '',
+    isValueSelected: false,
     typingTimeOut: 0,
     data:[ { id: 1, text: 'hello1', selected: false}, { id: 2, text: 'hello2', selected: false}]
 }
@@ -22,21 +22,22 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
         super(props);
         this.state = initialState;
         this.inputThrottler = new Throttler(WAIT_INTERVAL);
-        this.onChangeInput = this.onChangeInput.bind(this);
-        this.onClick = this.onClick.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
+        ["onChangeInput","onClick","onFocus","onBlur"].forEach(
+            name => {
+                this[name] = this[name].bind(this);
+            }
+        );
     }
 
     onChangeInput(event: React.SyntheticEvent<HTMLInputElement>) {
-        const {httpCall, minimumInputLength } = this.props;
+        const {loadOptions, minimumInputLength } = this.props;
         console.log('onChange input event');
         let target = event.currentTarget;
         let value: string = target.value;
-        this.setState({ httpCallInput: value });
+        this.setState({ inputValue: value });
         this.inputThrottler.throttle(() => {
             if (value.trim().length >= minimumInputLength) {
-                httpCall(value)
+                loadOptions(value)
                 .then(x => {
                     console.log(x.data);
                     this.setState({ data: x.data });
@@ -46,22 +47,17 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
     }
 
     onClick(event: React.SyntheticEvent<HTMLAnchorElement>) {
-        console.log('onClick')
-        console.log(event);
         this.props.onOptionsClick(event);
-        console.log(event.currentTarget.text);
-        let httpCallInput = event.currentTarget.text; 
-        this.setState({ httpCallInput });
+        let inputValue = event.currentTarget.text; 
+        this.setState({ inputValue, isValueSelected: true });
     }
 
     onFocus(event: React.SyntheticEvent<HTMLDivElement>) {
-        console.log('onFocus event is launched');
-        this.setState({ hideUl: false });
+        this.setState({ hideUl: false, isValueSelected: false });
     }
 
     onBlur(event: React.SyntheticEvent<HTMLDivElement>) {
-         console.log('onBlur event is launched');
-        this.setState({ hideUl: true, httpCallInput: '' });
+        this.state.isValueSelected ? this.setState({hideUl: true}) : this.setState({ hideUl: true, inputValue: '' });
     }
 
     renderOptions(data: JSonResult[]) {
@@ -69,7 +65,7 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
             return (
                 <ul className="dropdown-content" hidden={this.state.hideUl}>
                     {data.map((item, index) => {
-                        return <li key={index} className="dropdown-line"><a className="dropdown-line-content" href="#" onClick={this.onClick}>{item.text}</a></li>
+                        return <li key={index} className="dropdown-line"><a className="dropdown-line-content" href="#" onMouseDown={this.onClick}>{item.text}</a></li>
                     })}
                 </ul>
             );
@@ -82,18 +78,18 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
     }
 
     render() {
-        const { id, placeholder, className } = this.props;
+        const { id, placeholder } = this.props;
         if (this.state.data == undefined || this.state.data.length == 0) {
             return (
-                <div className={className} onFocus={this.onFocus} onBlur={this.onBlur}>
-                    <input className="dropdown-input" autoComplete="off" autoCapitalize="off" type="text" name={id} id={id} placeholder={placeholder} value={this.state.httpCallInput} onChange={this.onChangeInput} />
+                <div onFocus={this.onFocus} onBlur={this.onBlur}>
+                    <input className="dropdown-input" autoComplete="off" autoCapitalize="off" type="text" name={id} id={id} placeholder={placeholder} value={this.state.inputValue} onChange={this.onChangeInput} />
                 </div>
             )
         }
         else if (this.state.data.length > 0) {
             return (
-                <div className={className} onFocus={this.onFocus} onBlur={this.onBlur}>
-                    <input className="dropdown-input" autoComplete="off" autoCapitalize="off" placeholder={placeholder} name={id} id={id} type="text" value={this.state.httpCallInput} onChange={this.onChangeInput} />
+                <div onFocus={this.onFocus} onBlur={this.onBlur}>
+                    <input className="dropdown-input" autoComplete="off" autoCapitalize="off" placeholder={placeholder} name={id} id={id} type="text" value={this.state.inputValue} onChange={this.onChangeInput} />
                     {this.renderOptions(this.state.data)}
                 </div>
             );

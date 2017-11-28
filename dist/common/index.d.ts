@@ -9,27 +9,23 @@ export declare class JSonResult implements IJSonResult {
     selected: boolean;
 }
 export interface Select2Properties {
-    isMultiple?: boolean;
     allowClearButton?: boolean;
     id: string;
     placeholder: string;
-    className?: string;
     minimumInputLength: number;
     maximumInputLength?: number;
     maximumSelectionLength?: number;
     language: string;
-    selectedValue?: string;
     onOptionsClick: (event: React.SyntheticEvent<HTMLAnchorElement>) => void;
-    onSelect?: (event: any) => void;
-    httpCall: (inputValue: any) => Promise<{
+    loadOptions: (inputValue: any) => Promise<{
         data: JSonResult[];
     }>;
 }
 export interface Select2State {
     showingStyle: number;
     data: JSonResult[];
-    selectedValue: string;
-    httpCallInput: string;
+    isValueSelected: boolean;
+    inputValue: string;
     isTyping: boolean;
     typingTimeOut: number;
     hideUl: boolean;
