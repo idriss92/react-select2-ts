@@ -11,10 +11,10 @@ var initialState = {
     showingStyle: 1,
     selectedValue: '',
     typingTimeOut: 0,
-    data: []
+    data: [{ id: 1, text: 'hello1', selected: false }, { id: 2, text: 'hello2', selected: false }]
 };
 var WAIT_INTERVAL = 500;
-var Select2 = (function (_super) {
+var Select2 = /** @class */ (function (_super) {
     tslib_1.__extends(Select2, _super);
     function Select2(props) {
         var _this = _super.call(this, props) || this;
@@ -45,19 +45,19 @@ var Select2 = (function (_super) {
     };
     Select2.prototype.onClick = function (event) {
         console.log('onClick');
+        console.log(event);
+        this.props.onOptionsClick(event);
         console.log(event.currentTarget.text);
         var httpCallInput = event.currentTarget.text;
         this.setState({ httpCallInput: httpCallInput });
-        this.props.onOptionsClick(event);
-        // this.props.clickHandler(event)
     };
     Select2.prototype.onFocus = function (event) {
-        // console.log('onFocus event is launched');
-        // this.setState({ hideUl: false });
+        console.log('onFocus event is launched');
+        this.setState({ hideUl: false });
     };
     Select2.prototype.onBlur = function (event) {
-        //  console.log('onBlur event is launched');
-        // this.setState({ hideUl: true });
+        console.log('onBlur event is launched');
+        this.setState({ hideUl: true });
     };
     Select2.prototype.renderOptions = function (data) {
         var _this = this;
@@ -75,11 +75,11 @@ var Select2 = (function (_super) {
         var _a = this.props, id = _a.id, placeholder = _a.placeholder, className = _a.className;
         if (this.state.data == undefined || this.state.data.length == 0) {
             return (React.createElement("div", { className: className, onFocus: this.onFocus, onBlur: this.onBlur },
-                React.createElement("input", { className: "dropdown-input", role: "combobox", type: "text", name: id, id: id, placeholder: placeholder, value: this.state.httpCallInput, onChange: this.onChangeInput })));
+                React.createElement("input", { className: "dropdown-input", autoComplete: "off", autoCapitalize: "off", type: "text", name: id, id: id, placeholder: placeholder, value: this.state.httpCallInput, onChange: this.onChangeInput })));
         }
         else if (this.state.data.length > 0) {
             return (React.createElement("div", { className: className, onFocus: this.onFocus, onBlur: this.onBlur },
-                React.createElement("input", { className: "dropdown-input", placeholder: placeholder, name: id, id: id, type: "text", value: this.state.httpCallInput, onChange: this.onChangeInput }),
+                React.createElement("input", { className: "dropdown-input", autoComplete: "off", autoCapitalize: "off", placeholder: placeholder, name: id, id: id, type: "text", value: this.state.httpCallInput, onChange: this.onChangeInput }),
                 this.renderOptions(this.state.data)));
         }
         return (React.createElement("div", { onFocus: this.onFocus, onBlur: this.onBlur }));

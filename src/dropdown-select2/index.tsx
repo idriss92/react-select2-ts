@@ -10,7 +10,7 @@ const initialState: Select2State = {
     showingStyle: 1,
     selectedValue: '',
     typingTimeOut: 0,
-    data:[]
+    data:[ { id: 1, text: 'hello1', selected: false}, { id: 2, text: 'hello2', selected: false}]
 }
 
 const WAIT_INTERVAL = 500;
@@ -47,21 +47,21 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
 
     onClick(event: React.SyntheticEvent<HTMLAnchorElement>) {
         console.log('onClick')
+        console.log(event);
+        this.props.onOptionsClick(event);
         console.log(event.currentTarget.text);
         let httpCallInput = event.currentTarget.text; 
         this.setState({ httpCallInput });
-        this.props.onOptionsClick(event);
-        // this.props.clickHandler(event)
     }
 
     onFocus(event: React.SyntheticEvent<HTMLDivElement>) {
-        // console.log('onFocus event is launched');
-        // this.setState({ hideUl: false });
+        console.log('onFocus event is launched');
+        this.setState({ hideUl: false });
     }
 
     onBlur(event: React.SyntheticEvent<HTMLDivElement>) {
-        //  console.log('onBlur event is launched');
-        // this.setState({ hideUl: true });
+         console.log('onBlur event is launched');
+        this.setState({ hideUl: true, httpCallInput: '' });
     }
 
     renderOptions(data: JSonResult[]) {
@@ -86,14 +86,14 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
         if (this.state.data == undefined || this.state.data.length == 0) {
             return (
                 <div className={className} onFocus={this.onFocus} onBlur={this.onBlur}>
-                    <input className="dropdown-input" role="combobox" type="text" name={id} id={id} placeholder={placeholder} value={this.state.httpCallInput} onChange={this.onChangeInput} />
+                    <input className="dropdown-input" autoComplete="off" autoCapitalize="off" type="text" name={id} id={id} placeholder={placeholder} value={this.state.httpCallInput} onChange={this.onChangeInput} />
                 </div>
             )
         }
         else if (this.state.data.length > 0) {
             return (
                 <div className={className} onFocus={this.onFocus} onBlur={this.onBlur}>
-                    <input className="dropdown-input" placeholder={placeholder} name={id} id={id} type="text" value={this.state.httpCallInput} onChange={this.onChangeInput} />
+                    <input className="dropdown-input" autoComplete="off" autoCapitalize="off" placeholder={placeholder} name={id} id={id} type="text" value={this.state.httpCallInput} onChange={this.onChangeInput} />
                     {this.renderOptions(this.state.data)}
                 </div>
             );
