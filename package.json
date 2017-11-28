@@ -16,7 +16,7 @@
     "build:watch": "gulp watch",
     "cover": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha",
     "coveralls": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha && cat coverage/lcov.info | coveralls",
-    "lint": ""
+    "lint": "tslint -c ./tslint.json './src/**/*.tsx'"
   },
   "typings": "dist/index.d.ts",
   "files": [
@@ -50,6 +50,8 @@
     "react-dom": "16",
     "react-test-renderer": "^16.0.0",
     "select2": "^4.0.6-rc.0",
+    "tslint": "^5.8.0",
+    "tslint-react": "^3.2.0",
     "typescript": "^2.4.2"
   },
   "keywords": [

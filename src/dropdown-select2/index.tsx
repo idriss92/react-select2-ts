@@ -1,28 +1,28 @@
 import * as React from 'react';
 import '../styles/dropdown-select2.css';
-import { Select2Properties, Select2State, JSonResult } from '../common';
+import { ISelect2Properties, ISelect2State, JSonResult } from '../common';
 import Throttler from './Throttler';
 
-const initialState: Select2State = {
+const initialState: ISelect2State = {
     hideUl: false,
     inputValue: '',
     isTyping: false,
     showingStyle: 1,
     isValueSelected: false,
     typingTimeOut: 0,
-    data:[ { id: 1, text: 'hello1', selected: false}, { id: 2, text: 'hello2', selected: false}]
-}
+    data: []
+};
 
 const WAIT_INTERVAL = 500;
 
-export class Select2 extends React.Component<Select2Properties, Select2State>{
+export class Select2 extends React.Component<ISelect2Properties, ISelect2State> {
     inputThrottler: Throttler;
 
-    constructor(props: Select2Properties) {
+    constructor(props: ISelect2Properties) {
         super(props);
         this.state = initialState;
         this.inputThrottler = new Throttler(WAIT_INTERVAL);
-        ["onChangeInput","onClick","onFocus","onBlur"].forEach(
+        ['onChangeInput', 'onClick', 'onFocus', 'onBlur'].forEach(
             name => {
                 this[name] = this[name].bind(this);
             }
@@ -65,7 +65,10 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
             return (
                 <ul className="dropdown-content" hidden={this.state.hideUl}>
                     {data.map((item, index) => {
-                        return <li key={index} className="dropdown-line"><a className="dropdown-line-content" href="#" onMouseDown={this.onClick}>{item.text}</a></li>
+                        return <li key={index} className="dropdown-line">
+                            <a className="dropdown-line-content" href="#" onMouseDown={this.onClick}>
+                                {item.text}
+                            </a></li>;
                     })}
                 </ul>
             );
@@ -79,24 +82,42 @@ export class Select2 extends React.Component<Select2Properties, Select2State>{
 
     render() {
         const { id, placeholder } = this.props;
-        if (this.state.data == undefined || this.state.data.length == 0) {
+        if (this.state.data === undefined || this.state.data.length === 0) {
             return (
                 <div onFocus={this.onFocus} onBlur={this.onBlur}>
-                    <input className="dropdown-input" autoComplete="off" autoCapitalize="off" type="text" name={id} id={id} placeholder={placeholder} value={this.state.inputValue} onChange={this.onChangeInput} />
+                    <input
+                        className="dropdown-input" 
+                        autoComplete="off" 
+                        autoCapitalize="off" 
+                        type="text" 
+                        name={id} 
+                        id={id} 
+                        placeholder={placeholder} 
+                        value={this.state.inputValue} 
+                        onChange={this.onChangeInput} 
+                    />
                 </div>
-            )
+            );
         }
-        else if (this.state.data.length > 0) {
+        if (this.state.data.length > 0) {
             return (
                 <div onFocus={this.onFocus} onBlur={this.onBlur}>
-                    <input className="dropdown-input" autoComplete="off" autoCapitalize="off" placeholder={placeholder} name={id} id={id} type="text" value={this.state.inputValue} onChange={this.onChangeInput} />
+                    <input 
+                        className="dropdown-input" 
+                        autoComplete="off" 
+                        autoCapitalize="off" 
+                        placeholder={placeholder} 
+                        name={id} 
+                        id={id} 
+                        type="text" 
+                        value={this.state.inputValue}
+                        onChange={this.onChangeInput} 
+                        />
                     {this.renderOptions(this.state.data)}
                 </div>
             );
         }
-        return (
-            <div onFocus={this.onFocus} onBlur={this.onBlur}></div>
-        );
+        return <div onFocus={this.onFocus} onBlur={this.onBlur} />;
     }
 }
 

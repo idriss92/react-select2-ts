@@ -11,7 +11,7 @@ var initialState = {
     showingStyle: 1,
     isValueSelected: false,
     typingTimeOut: 0,
-    data: [{ id: 1, text: 'hello1', selected: false }, { id: 2, text: 'hello2', selected: false }]
+    data: []
 };
 var WAIT_INTERVAL = 500;
 var Select2 = (function (_super) {
@@ -20,7 +20,7 @@ var Select2 = (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.state = initialState;
         _this.inputThrottler = new Throttler_1.default(WAIT_INTERVAL);
-        ["onChangeInput", "onClick", "onFocus", "onBlur"].forEach(function (name) {
+        ['onChangeInput', 'onClick', 'onFocus', 'onBlur'].forEach(function (name) {
             _this[name] = _this[name].bind(_this);
         });
         return _this;
@@ -67,16 +67,16 @@ var Select2 = (function (_super) {
     };
     Select2.prototype.render = function () {
         var _a = this.props, id = _a.id, placeholder = _a.placeholder;
-        if (this.state.data == undefined || this.state.data.length == 0) {
+        if (this.state.data === undefined || this.state.data.length === 0) {
             return (React.createElement("div", { onFocus: this.onFocus, onBlur: this.onBlur },
                 React.createElement("input", { className: "dropdown-input", autoComplete: "off", autoCapitalize: "off", type: "text", name: id, id: id, placeholder: placeholder, value: this.state.inputValue, onChange: this.onChangeInput })));
         }
-        else if (this.state.data.length > 0) {
+        if (this.state.data.length > 0) {
             return (React.createElement("div", { onFocus: this.onFocus, onBlur: this.onBlur },
                 React.createElement("input", { className: "dropdown-input", autoComplete: "off", autoCapitalize: "off", placeholder: placeholder, name: id, id: id, type: "text", value: this.state.inputValue, onChange: this.onChangeInput }),
                 this.renderOptions(this.state.data)));
         }
-        return (React.createElement("div", { onFocus: this.onFocus, onBlur: this.onBlur }));
+        return React.createElement("div", { onFocus: this.onFocus, onBlur: this.onBlur });
     };
     return Select2;
 }(React.Component));

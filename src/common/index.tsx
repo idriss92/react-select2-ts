@@ -2,13 +2,13 @@ export interface IJSonResult {
     id: number;
     text: string;
 }
-export class JSonResult implements IJSonResult{
+export class JSonResult implements IJSonResult {
     id: number;
     text: string;
     selected: boolean;
 }
 
-export interface Select2Properties {
+export interface ISelect2Properties {
     allowClearButton?: boolean;
     id: string;
     placeholder: string;
@@ -16,11 +16,11 @@ export interface Select2Properties {
     maximumInputLength?: number;
     maximumSelectionLength?: number;
     language: string;
-    onOptionsClick:(event: React.SyntheticEvent<HTMLAnchorElement>) => void;
-    loadOptions:(inputValue: any) => Promise<{data: JSonResult[]}>;
+    onOptionsClick: (event: React.SyntheticEvent<HTMLAnchorElement>) => void;
+    loadOptions: (inputValue: any) => Promise<{data: JSonResult[]}>;
 }
 
-export interface Select2State{
+export interface ISelect2State {
     showingStyle: number;
     data: JSonResult[];
     isValueSelected: boolean;
@@ -30,7 +30,7 @@ export interface Select2State{
     hideUl: boolean;
 }
 
-export interface SelectProperties {
+export interface ISelectProperties {
     data: IJSonResult[];
     placeholder: string;
     className: string;

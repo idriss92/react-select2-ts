@@ -8,7 +8,7 @@ export declare class JSonResult implements IJSonResult {
     text: string;
     selected: boolean;
 }
-export interface Select2Properties {
+export interface ISelect2Properties {
     allowClearButton?: boolean;
     id: string;
     placeholder: string;
@@ -21,7 +21,7 @@ export interface Select2Properties {
         data: JSonResult[];
     }>;
 }
-export interface Select2State {
+export interface ISelect2State {
     showingStyle: number;
     data: JSonResult[];
     isValueSelected: boolean;
@@ -30,7 +30,7 @@ export interface Select2State {
     typingTimeOut: number;
     hideUl: boolean;
 }
-export interface SelectProperties {
+export interface ISelectProperties {
     data: IJSonResult[];
     placeholder: string;
     className: string;
