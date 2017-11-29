@@ -2,56 +2,27 @@ $bg: #987;
 $text: lighten($bg, 35%);
 $easingName: 'easeInSine';
 
+.dropdown {
+    // width: 243px;
+    width: inherit;
+
+
 .dropdown-input {
-    // background-image: url('../images/searchicon.png');
-    // background-position: 10px 12px;
-    // background-repeat: no-repeat;
     background-image: none;
     background-color: #fff;
     display: block;
     color: #555;
     height: 34px;
     width: 100%;
-    font-size: 14px; // margin: .2px 0 1px;
-    padding: 6px 12px; //12px 20px 12px 40px;
-    width: 100%;
+    font-size: 14px;
+    padding: 6px 12px;
+    // width: 100%;
+    width: inherit;
     line-height: 1.42857143;
-    border: 1px solid #ccc; // space after the input
+    border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-// .dropdown{
-//     display: inline-block;
-//     position: relative;
-//     border: 1px solid;
-//     border-radius: 3px;
-//     border-color: white;
-//     height: 28px;
-//     width: 150px;
-//     overflow: hidden;
-//     &::before, &::after{
-//         position: absolute
-//     }
-//     &:focus{
-//     }
-// }
-// .dropdown-content{
-//     overflow:scroll;
-//     padding: 5px;
-//     overflow-x:hidden;
-//     height: 100px;
-//     display: inline-block;
-//     // overflow: auto;
-//     // width: 100px;
-//     line-height: 3em
-//     // height: 300px;
-//     // overflow-x: hidden;
-//     // overflow: scroll;
-//     // display: none;
-//     // position: absolute;
-//     // min-width: 160px;
-//     // z-index: 1;
-// }
 .dropdown-content {
     list-style: none;
     padding: 0;
@@ -60,7 +31,8 @@ $easingName: 'easeInSine';
     overflow: auto;
     overflow-x: hidden;
     height: 200px;
-    width: 243px;
+    // width: 100%;
+    width: inherit;
     z-index: 2;
     .dropdown-line {
         .dropdown-line-content {
@@ -70,7 +42,6 @@ $easingName: 'easeInSine';
             padding: 12px;
             text-decoration: none;
             font-size: 14px;
-            // height: 34px;
             color: black;
             display: block;
             &:hover:not(.header) {
@@ -78,7 +49,5 @@ $easingName: 'easeInSine';
             }
         }
     }
-    &::before{
-        // @include transition(all 600ms ceaser($easingName))
-    }
+}
 }

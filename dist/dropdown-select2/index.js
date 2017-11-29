@@ -3,23 +3,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var React = require("react");
 require("../styles/dropdown-select2.css");
-var Throttler_1 = require("./Throttler");
+var throttler_1 = require("./throttler");
 var initialState = {
     hideUl: false,
     inputValue: '',
-    isTyping: false,
-    showingStyle: 1,
     isValueSelected: false,
     typingTimeOut: 0,
     data: []
 };
 var WAIT_INTERVAL = 500;
-var Select2 = (function (_super) {
+var Select2 = /** @class */ (function (_super) {
     tslib_1.__extends(Select2, _super);
     function Select2(props) {
         var _this = _super.call(this, props) || this;
         _this.state = initialState;
-        _this.inputThrottler = new Throttler_1.default(WAIT_INTERVAL);
+        _this.inputThrottler = new throttler_1.default(WAIT_INTERVAL);
         ['onChangeInput', 'onClick', 'onFocus', 'onBlur'].forEach(function (name) {
             _this[name] = _this[name].bind(_this);
         });
@@ -28,15 +26,13 @@ var Select2 = (function (_super) {
     Select2.prototype.onChangeInput = function (event) {
         var _this = this;
         var _a = this.props, loadOptions = _a.loadOptions, minimumInputLength = _a.minimumInputLength;
-        console.log('onChange input event');
         var target = event.currentTarget;
         var value = target.value;
         this.setState({ inputValue: value });
         this.inputThrottler.throttle(function () {
-            if (value.trim().length >= minimumInputLength) {
+            if (minimumInputLength !== undefined && value.trim().length >= minimumInputLength) {
                 loadOptions(value)
                     .then(function (x) {
-                    console.log(x.data);
                     _this.setState({ data: x.data });
                 });
             }
@@ -68,15 +64,15 @@ var Select2 = (function (_super) {
     Select2.prototype.render = function () {
         var _a = this.props, id = _a.id, placeholder = _a.placeholder;
         if (this.state.data === undefined || this.state.data.length === 0) {
-            return (React.createElement("div", { onFocus: this.onFocus, onBlur: this.onBlur },
+            return (React.createElement("div", { className: "dropdown", onFocus: this.onFocus, onBlur: this.onBlur },
                 React.createElement("input", { className: "dropdown-input", autoComplete: "off", autoCapitalize: "off", type: "text", name: id, id: id, placeholder: placeholder, value: this.state.inputValue, onChange: this.onChangeInput })));
         }
         if (this.state.data.length > 0) {
-            return (React.createElement("div", { onFocus: this.onFocus, onBlur: this.onBlur },
+            return (React.createElement("div", { className: "dropdown", onFocus: this.onFocus, onBlur: this.onBlur },
                 React.createElement("input", { className: "dropdown-input", autoComplete: "off", autoCapitalize: "off", placeholder: placeholder, name: id, id: id, type: "text", value: this.state.inputValue, onChange: this.onChangeInput }),
                 this.renderOptions(this.state.data)));
         }
-        return React.createElement("div", { onFocus: this.onFocus, onBlur: this.onBlur });
+        return React.createElement("div", { className: "dropdown", onFocus: this.onFocus, onBlur: this.onBlur });
     };
     return Select2;
 }(React.Component));

@@ -12,9 +12,10 @@ export interface ISelect2Properties {
     allowClearButton?: boolean;
     id: string;
     placeholder: string;
-    minimumInputLength: number;
+    minimumInputLength?: number;
     maximumInputLength?: number;
     maximumSelectionLength?: number;
+    multipleSelection?: boolean;
     language: string;
     onOptionsClick: (event: React.SyntheticEvent<HTMLAnchorElement>) => void;
     loadOptions: (inputValue: any) => Promise<{
@@ -22,11 +23,9 @@ export interface ISelect2Properties {
     }>;
 }
 export interface ISelect2State {
-    showingStyle: number;
     data: JSonResult[];
     isValueSelected: boolean;
     inputValue: string;
-    isTyping: boolean;
     typingTimeOut: number;
     hideUl: boolean;
 }

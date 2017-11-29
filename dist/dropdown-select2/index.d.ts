@@ -2,7 +2,7 @@
 import * as React from 'react';
 import '../styles/dropdown-select2.css';
 import { ISelect2Properties, ISelect2State, JSonResult } from '../common';
-import Throttler from './Throttler';
+import Throttler from './throttler';
 export declare class Select2 extends React.Component<ISelect2Properties, ISelect2State> {
     inputThrottler: Throttler;
     constructor(props: ISelect2Properties);

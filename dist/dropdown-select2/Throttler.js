@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Throttler = (function () {
+var Throttler = /** @class */ (function () {
     function Throttler(waitInterval) {
         this.waitInterval = waitInterval;
     }
