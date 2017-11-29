@@ -62,7 +62,13 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
                 <ul className="dropdown-content" hidden={this.state.hideUl}>
                     {data.map((item, index) => {
                         return <li key={index} className="dropdown-line">
-                            <a className="dropdown-line-content" href="#" onMouseDown={this.onClick}>
+                            <a 
+                                className="dropdown-line-content" 
+                                key={item.id}
+                                id={item.id.toString()} 
+                                href="#" 
+                                onMouseDown={this.onClick}
+                            >
                                 {item.text}
                             </a></li>;
                     })}

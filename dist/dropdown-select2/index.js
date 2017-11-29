@@ -54,7 +54,7 @@ var Select2 = (function (_super) {
         if (data != null && data.length > 0) {
             return (React.createElement("ul", { className: "dropdown-content", hidden: this.state.hideUl }, data.map(function (item, index) {
                 return React.createElement("li", { key: index, className: "dropdown-line" },
-                    React.createElement("a", { className: "dropdown-line-content", href: "#", onMouseDown: _this.onClick }, item.text));
+                    React.createElement("a", { className: "dropdown-line-content", key: item.id, id: item.id.toString(), href: "#", onMouseDown: _this.onClick }, item.text));
             })));
         }
         return (React.createElement("ul", { className: "dropdown-content", hidden: this.state.hideUl },
