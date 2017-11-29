@@ -45,7 +45,7 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
     onClick(event: React.SyntheticEvent<HTMLAnchorElement>) {
         this.props.onOptionsClick(event);
         const inputValue = event.currentTarget.text; 
-        this.setState({ inputValue, isValueSelected: true });
+        this.setState({ inputValue, isValueSelected: true, hideUl: true });
     }
 
     onFocus(event: React.SyntheticEvent<HTMLDivElement>) {

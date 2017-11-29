@@ -1,36 +1,38 @@
-.dropdown {
-  width: inherit; }
-  .dropdown .dropdown-input {
-    background-image: none;
-    background-color: #fff;
-    display: block;
-    color: #555;
-    height: 34px;
-    width: 100%;
+.dropdown .dropdown-input {
+  background-image: none;
+  background-color: #fff;
+  display: block;
+  color: #555;
+  height: 34px;
+  font-size: 14px;
+  padding: 6px 12px;
+  width: 100%;
+  line-height: 1.42857143;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; }
+  .dropdown .dropdown-input:focus {
+    border-color: #66afe9;
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.075), 0px 0px 8px rgba(102, 175, 233, 0.6); }
+
+.dropdown .dropdown-content {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  overflow: auto;
+  overflow-x: hidden;
+  height: 200px;
+  width: 100%;
+  z-index: 2; }
+  .dropdown .dropdown-content .dropdown-line .dropdown-line-content {
+    border: 1px solid #ddd;
+    margin-top: -1px;
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
     font-size: 14px;
-    padding: 6px 12px;
-    width: inherit;
-    line-height: 1.42857143;
-    border: 1px solid #ccc;
-    border-radius: 4px; }
-  .dropdown .dropdown-content {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: fixed;
-    overflow: auto;
-    overflow-x: hidden;
-    height: 200px;
-    width: inherit;
-    z-index: 2; }
-    .dropdown .dropdown-content .dropdown-line .dropdown-line-content {
-      border: 1px solid #ddd;
-      margin-top: -1px;
-      background-color: #f6f6f6;
-      padding: 12px;
-      text-decoration: none;
-      font-size: 14px;
-      color: black;
-      display: block; }
-      .dropdown .dropdown-content .dropdown-line .dropdown-line-content:hover:not(.header) {
-        background-color: #eee; }
+    color: black;
+    display: block; }
+    .dropdown .dropdown-content .dropdown-line .dropdown-line-content:hover:not(.header) {
+      background-color: #eee; }

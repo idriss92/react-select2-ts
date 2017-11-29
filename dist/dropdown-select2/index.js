@@ -12,7 +12,7 @@ var initialState = {
     data: []
 };
 var WAIT_INTERVAL = 500;
-var Select2 = /** @class */ (function (_super) {
+var Select2 = (function (_super) {
     tslib_1.__extends(Select2, _super);
     function Select2(props) {
         var _this = _super.call(this, props) || this;
@@ -41,7 +41,7 @@ var Select2 = /** @class */ (function (_super) {
     Select2.prototype.onClick = function (event) {
         this.props.onOptionsClick(event);
         var inputValue = event.currentTarget.text;
-        this.setState({ inputValue: inputValue, isValueSelected: true });
+        this.setState({ inputValue: inputValue, isValueSelected: true, hideUl: true });
     };
     Select2.prototype.onFocus = function (event) {
         this.setState({ hideUl: false, isValueSelected: false });
