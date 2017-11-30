@@ -28,11 +28,3 @@ export interface ISelect2State {
     typingTimeOut: number;
     hideUl: boolean;
 }
-
-export interface ISelectProperties {
-    data: IJSonResult[];
-    placeholder: string;
-    className: string;
-    uniqueName: string;
-    searchable: boolean;
-}
