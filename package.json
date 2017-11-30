@@ -1,6 +1,6 @@
 {
   "name": "react-select2-ts",
-  "version": "1.7.6",
+  "version": "1.7.7",
   "main": "dist/index.js",
   "repository": {
     "url": "https://github.com/idriss92/react-select2-ts.git",
