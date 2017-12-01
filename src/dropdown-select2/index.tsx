@@ -7,7 +7,7 @@ const initialState: ISelect2State = {
     hideUl: false,
     inputValue: '',
     isValueSelected: false,
-    typingTimeOut: 0,
+    isLoading: false,
     data: []
 };
 
@@ -33,10 +33,11 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
         let value: string = target.value;
         this.setState({ inputValue: value });
         this.inputThrottler.throttle(() => {
+            this.setState({ isLoading: true });
             if (minimumInputLength !== undefined && value.trim().length >= minimumInputLength) {
                 loadOptions(value)
                 .then(x => {
-                    this.setState({ data: x.data });
+                    this.setState({ data: x.data, isLoading: false });
                 });
             }
         });
@@ -53,7 +54,9 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
     }
 
     onBlur(event: React.SyntheticEvent<HTMLDivElement>) {
-        this.state.isValueSelected ? this.setState({hideUl: true}) : this.setState({ hideUl: true, inputValue: '' });
+        this.state.isValueSelected ?
+         this.setState({ hideUl: true }) : this.setState({ hideUl: true, inputValue: '' });
+        this.setState({ data: [] });
     }
 
     renderOptions(data: JSonResult[]) {
@@ -84,7 +87,8 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
 
     render() {
         const { id, placeholder } = this.props;
-        if (this.state.data === undefined || this.state.data.length === 0) {
+        const { data, inputValue } = this.state;
+        if (data === undefined || data.length === 0) {
             return (
                 <div className="dropdown" onFocus={this.onFocus} onBlur={this.onBlur}>
                     <input
@@ -95,13 +99,13 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
                         name={id} 
                         id={id} 
                         placeholder={placeholder} 
-                        value={this.state.inputValue} 
+                        value={inputValue} 
                         onChange={this.onChangeInput} 
                     />
                 </div>
             );
         }
-        if (this.state.data.length > 0) {
+        if (data.length > 0) {
             return (
                 <div className="dropdown" onFocus={this.onFocus} onBlur={this.onBlur}>
                     <input 
@@ -112,10 +116,10 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
                         name={id} 
                         id={id} 
                         type="text" 
-                        value={this.state.inputValue}
+                        value={inputValue}
                         onChange={this.onChangeInput} 
                         />
-                    {this.renderOptions(this.state.data)}
+                    {this.renderOptions(data)}
                 </div>
             );
         }
