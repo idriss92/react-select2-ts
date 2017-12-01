@@ -28,7 +28,7 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
     }
 
     onChangeInput(event: React.SyntheticEvent<HTMLInputElement>) {
-        const {loadOptions, minimumInputLength } = this.props;
+        const { loadOptions, minimumInputLength } = this.props;
         const target = event.currentTarget;
         let value: string = target.value;
         this.setState({ inputValue: value });
@@ -36,16 +36,16 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
             this.setState({ isLoading: true });
             if (minimumInputLength !== undefined && value.trim().length >= minimumInputLength) {
                 loadOptions(value)
-                .then(x => {
-                    this.setState({ data: x.data, isLoading: false });
-                });
+                    .then(x => {
+                        this.setState({ data: x.data, isLoading: false });
+                    });
             }
         });
     }
 
     onClick(event: React.SyntheticEvent<HTMLAnchorElement>) {
         this.props.onOptionsClick(event);
-        const inputValue = event.currentTarget.text; 
+        const inputValue = event.currentTarget.text;
         this.setState({ inputValue, isValueSelected: true, hideUl: true });
     }
 
@@ -55,7 +55,7 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
 
     onBlur(event: React.SyntheticEvent<HTMLDivElement>) {
         this.state.isValueSelected ?
-         this.setState({ hideUl: true }) : this.setState({ hideUl: true, inputValue: '' });
+            this.setState({ hideUl: true }) : this.setState({ hideUl: true, inputValue: '' });
         this.setState({ data: [] });
     }
 
@@ -68,8 +68,8 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
                             <a
                                 className="dropdown-line-content"
                                 key={item.id}
-                                id={item.id.toString()} 
-                                href="#" 
+                                id={item.id.toString()}
+                                href="#"
                                 onMouseDown={this.onClick}
                             >
                                 {item.text}
@@ -92,15 +92,15 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
             return (
                 <div className="dropdown" onFocus={this.onFocus} onBlur={this.onBlur}>
                     <input
-                        className="dropdown-input" 
-                        autoComplete="off" 
-                        autoCapitalize="off" 
-                        type="text" 
-                        name={id} 
-                        id={id} 
-                        placeholder={placeholder} 
-                        value={inputValue} 
-                        onChange={this.onChangeInput} 
+                        className="dropdown-input"
+                        autoComplete="off"
+                        autoCapitalize="off"
+                        type="text"
+                        name={id}
+                        id={id}
+                        placeholder={placeholder}
+                        value={inputValue}
+                        onChange={this.onChangeInput}
                     />
                 </div>
             );

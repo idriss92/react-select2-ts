@@ -8,7 +8,7 @@ var initialState = {
     hideUl: false,
     inputValue: '',
     isValueSelected: false,
-    typingTimeOut: 0,
+    isLoading: false,
     data: []
 };
 var WAIT_INTERVAL = 500;
@@ -30,10 +30,11 @@ var Select2 = (function (_super) {
         var value = target.value;
         this.setState({ inputValue: value });
         this.inputThrottler.throttle(function () {
+            _this.setState({ isLoading: true });
             if (minimumInputLength !== undefined && value.trim().length >= minimumInputLength) {
                 loadOptions(value)
                     .then(function (x) {
-                    _this.setState({ data: x.data });
+                    _this.setState({ data: x.data, isLoading: false });
                 });
             }
         });
@@ -47,7 +48,9 @@ var Select2 = (function (_super) {
         this.setState({ hideUl: false, isValueSelected: false });
     };
     Select2.prototype.onBlur = function (event) {
-        this.state.isValueSelected ? this.setState({ hideUl: true }) : this.setState({ hideUl: true, inputValue: '' });
+        this.state.isValueSelected ?
+            this.setState({ hideUl: true }) : this.setState({ hideUl: true, inputValue: '' });
+        this.setState({ data: [] });
     };
     Select2.prototype.renderOptions = function (data) {
         var _this = this;
@@ -63,14 +66,15 @@ var Select2 = (function (_super) {
     };
     Select2.prototype.render = function () {
         var _a = this.props, id = _a.id, placeholder = _a.placeholder;
-        if (this.state.data === undefined || this.state.data.length === 0) {
+        var _b = this.state, data = _b.data, inputValue = _b.inputValue;
+        if (data === undefined || data.length === 0) {
             return (React.createElement("div", { className: "dropdown", onFocus: this.onFocus, onBlur: this.onBlur },
-                React.createElement("input", { className: "dropdown-input", autoComplete: "off", autoCapitalize: "off", type: "text", name: id, id: id, placeholder: placeholder, value: this.state.inputValue, onChange: this.onChangeInput })));
+                React.createElement("input", { className: "dropdown-input", autoComplete: "off", autoCapitalize: "off", type: "text", name: id, id: id, placeholder: placeholder, value: inputValue, onChange: this.onChangeInput })));
         }
-        if (this.state.data.length > 0) {
+        if (data.length > 0) {
             return (React.createElement("div", { className: "dropdown", onFocus: this.onFocus, onBlur: this.onBlur },
-                React.createElement("input", { className: "dropdown-input", autoComplete: "off", autoCapitalize: "off", placeholder: placeholder, name: id, id: id, type: "text", value: this.state.inputValue, onChange: this.onChangeInput }),
-                this.renderOptions(this.state.data)));
+                React.createElement("input", { className: "dropdown-input", autoComplete: "off", autoCapitalize: "off", placeholder: placeholder, name: id, id: id, type: "text", value: inputValue, onChange: this.onChangeInput }),
+                this.renderOptions(data)));
         }
         return React.createElement("div", { className: "dropdown", onFocus: this.onFocus, onBlur: this.onBlur });
     };
