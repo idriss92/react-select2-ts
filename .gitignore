@@ -3,4 +3,4 @@
 /.vs/slnx.sqlite
 /node_modules
 *.snap
-*.log
+*.logyarn 
