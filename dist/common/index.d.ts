@@ -26,6 +26,6 @@ export interface ISelect2State {
     data: JSonResult[];
     isValueSelected: boolean;
     inputValue: string;
-    typingTimeOut: number;
+    isLoading: boolean;
     hideUl: boolean;
 }

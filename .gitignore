@@ -2,3 +2,5 @@
 /.vs/react-select2-ts/v15/.suo
 /.vs/slnx.sqlite
 /node_modules
+*.snap
+*.log

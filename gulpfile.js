@@ -2,7 +2,7 @@ var gulp = require('gulp'),
     ts = require('gulp-typescript'),
     del = require('del'),
     merge = require('merge2'),
-    sass = require('gulp-sass');
+    plugins = require('gulp-load-plugins');
     // scss = require('gulp-scss'),
     // image = require('gulp-image');
 
@@ -23,23 +23,22 @@ gulp.task('typescript', ['clean'], function(){
     ])
 });
 
-gulp.task('sass', ['clean'], function(){
+gulp.task('sass',['clean'], () => {
     return gulp.src('src/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('dist'))
+        .pipe(plugins().sourcemaps.init())
+        .pipe(plugins().sass({
+            'outputStyle': 'compressed'
+        }).on('error', plugins().sass.logError))
+        .pipe(plugins().sourcemaps.write())
+        .pipe(gulp.dest('dist'));
 });
-
-// gulp.task('scss', ['clean'], function(){
-//     return gulp.src('src/**/*.scss')
-//         .pipe(scss({"bundleExec": true}))
-//         .pipe(gulp.dest('dist'))
-// })
-
-// gulp.task('image', ['clean'], function(){
-//     gulp.src('src/images/**/*.*')
-//         .pipe(gulp.dest('dist/images'));
-// })
 
 gulp.task('clean', function(){
     return del.sync('dist');
+})
+
+gulp.task('jsmin', () =>{
+    var envs = plugins().env.set({
+        'NODE_ENV': 'production'
+    })
 })
