@@ -2,7 +2,8 @@ var gulp = require('gulp'),
     ts = require('gulp-typescript'),
     del = require('del'),
     merge = require('merge2'),
-    plugins = require('gulp-load-plugins');
+    plugins = require('gulp-load-plugins'),
+    babel = require('gulp-babel');
     // scss = require('gulp-scss'),
     // image = require('gulp-image');
 
