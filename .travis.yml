@@ -3,7 +3,7 @@ language: node_js
 node_js:
   - "v6"
 script:
-  - yarn run install
-  - yarn run lint
-  - yarn run test
+  - yarn install
+  - yarn lint
+  - yarn test
   # - npm run coveralls
