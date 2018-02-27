@@ -66,15 +66,15 @@ var Select2 = /** @class */ (function (_super) {
                 React.createElement("a", { className: "dropdown-line-content" }, "No results founds"))));
     };
     Select2.prototype.render = function () {
-        var _a = this.props, id = _a.id, placeholder = _a.placeholder;
+        var _a = this.props, id = _a.id, placeholder = _a.placeholder, required = _a.required;
         var _b = this.state, data = _b.data, inputValue = _b.inputValue, isValueSelected = _b.isValueSelected;
         if (data === undefined || data.length === 0) {
             return (React.createElement("div", { className: classnames('dropdown'), onFocus: this.onFocus, onBlur: this.onBlur },
-                React.createElement("input", { className: !isValueSelected ? 'dropdown-input' : 'dropdown-input error-input', autoComplete: "off", autoCapitalize: "off", type: "text", name: id, id: id, placeholder: placeholder, value: inputValue, onChange: this.onChangeInput, required: !isValueSelected })));
+                React.createElement("input", { className: isValueSelected ? 'dropdown-input' : 'dropdown-input error-input', autoComplete: "off", autoCapitalize: "off", type: "text", name: id, id: id, placeholder: placeholder, value: inputValue, onChange: this.onChangeInput, required: required })));
         }
         if (data.length > 0) {
             return (React.createElement("div", { className: classnames('dropdown'), onFocus: this.onFocus, onBlur: this.onBlur },
-                React.createElement("input", { className: !isValueSelected ? 'dropdown-input' : 'dropdown-input error-input', autoComplete: "off", autoCapitalize: "off", placeholder: placeholder, name: id, id: id, type: "text", value: inputValue, onChange: this.onChangeInput, required: !isValueSelected }),
+                React.createElement("input", { className: !isValueSelected ? 'dropdown-input' : 'dropdown-input error-input', autoComplete: "off", autoCapitalize: "off", placeholder: placeholder, name: id, id: id, type: "text", value: inputValue, onChange: this.onChangeInput, required: required }),
                 this.renderOptions(data)));
         }
         return React.createElement("div", { className: classnames('dropdown'), onFocus: this.onFocus, onBlur: this.onBlur });

@@ -18,6 +18,7 @@ export interface ISelect2Properties {
     maximumSelectionLength?: number;
     multipleSelection?: boolean;
     language: string;
+    required?: boolean;
     onOptionsClick: (event: React.SyntheticEvent<HTMLAnchorElement>) => void;
     loadOptions: (inputValue: any) => Promise<{
         data: JSonResult[];
