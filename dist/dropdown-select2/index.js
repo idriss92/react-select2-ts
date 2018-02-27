@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var React = require("react");
+var classnames = require("classnames");
 require("../styles/dropdown-select2.css");
 var throttler_1 = require("./throttler");
 var initialState = {
@@ -12,7 +13,7 @@ var initialState = {
     data: []
 };
 var WAIT_INTERVAL = 500;
-var Select2 = (function (_super) {
+var Select2 = /** @class */ (function (_super) {
     tslib_1.__extends(Select2, _super);
     function Select2(props) {
         var _this = _super.call(this, props) || this;
@@ -68,15 +69,15 @@ var Select2 = (function (_super) {
         var _a = this.props, id = _a.id, placeholder = _a.placeholder;
         var _b = this.state, data = _b.data, inputValue = _b.inputValue, isValueSelected = _b.isValueSelected;
         if (data === undefined || data.length === 0) {
-            return (React.createElement("div", { className: "dropdown", onFocus: this.onFocus, onBlur: this.onBlur },
+            return (React.createElement("div", { className: classnames('dropdown'), onFocus: this.onFocus, onBlur: this.onBlur },
                 React.createElement("input", { className: !isValueSelected ? 'dropdown-input' : 'dropdown-input error-input', autoComplete: "off", autoCapitalize: "off", type: "text", name: id, id: id, placeholder: placeholder, value: inputValue, onChange: this.onChangeInput, required: !isValueSelected })));
         }
         if (data.length > 0) {
-            return (React.createElement("div", { className: "dropdown", onFocus: this.onFocus, onBlur: this.onBlur },
+            return (React.createElement("div", { className: classnames('dropdown'), onFocus: this.onFocus, onBlur: this.onBlur },
                 React.createElement("input", { className: !isValueSelected ? 'dropdown-input' : 'dropdown-input error-input', autoComplete: "off", autoCapitalize: "off", placeholder: placeholder, name: id, id: id, type: "text", value: inputValue, onChange: this.onChangeInput, required: !isValueSelected }),
                 this.renderOptions(data)));
         }
-        return React.createElement("div", { className: "dropdown", onFocus: this.onFocus, onBlur: this.onBlur });
+        return React.createElement("div", { className: classnames('dropdown'), onFocus: this.onFocus, onBlur: this.onBlur });
     };
     return Select2;
 }(React.Component));

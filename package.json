@@ -9,11 +9,9 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "gulp && yarn test:unit",
-    "test:unit": "yarn install && ava dist/tests",
-    "test:watch": "ava --watch dist/tests",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
     "build": "gulp",
-    "cover": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha",
     "coveralls": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha && cat coverage/lcov.info | coveralls",
     "lint": "tslint -c ./tslint.json './src/**/*.tsx'"
   },
@@ -22,28 +20,66 @@
     "dist/"
   ],
   "dependencies": {
+    "@types/chai": "^4.0.6",
+    "chai": "^4.1.2",
     "es6-promise": "^4.1.1",
+    "mocha": "^4.0.1",
     "tslib": "^1.8.0"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.3",
     "@types/enzyme": "^3.1.1",
-    "ava": "^0.23.0",
+    "@types/enzyme-adapter-react-16": "^1.0.1",
+    "@types/jest": "^21.1.8",
+    "@types/react-test-renderer": "^16.0.0",
+    "@types/sinon": "^4.0.0",
+    "ava": "^0.24.0",
+    "classnames": "^2.2.5",
     "cross-env": "^5.1.1",
     "del": "^3.0.0",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
     "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
     "gulp-image": "^4.1.0",
+    "gulp-load-plugins": "^1.5.0",
     "gulp-sass": "^3.1.0",
     "gulp-scss": "^1.4.0",
+    "gulp-sourcemaps": "^2.6.1",
     "gulp-typescript": "^3.2.3",
+    "jest-cli": "^21.2.1",
     "merge2": "^1.2.0",
     "react": "16",
     "react-dom": "16",
     "react-test-renderer": "^16.0.0",
+    "sinon": "^4.1.2",
+    "ts-jest": "^21.2.4",
     "tslint": "^5.8.0",
     "tslint-react": "^3.2.0",
-    "typescript": "^2.4.2"
+    "typescript": "^2.4.2",
+    "typescript-babel-jest": "^1.0.5"
+  },
+  "jest": {
+    "coverageDirectory": "<rootDir>/coverage/",
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "mapCoverage": true,
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "notify": true,
+    "testRegex": "(/tests/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
   },
   "keywords": [
     "input",

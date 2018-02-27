@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as classnames from 'classnames';
 import '../styles/dropdown-select2.css';
 import { ISelect2Properties, ISelect2State, JSonResult } from '../common';
 import Throttler from './throttler';
@@ -91,7 +92,7 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
         const { data, inputValue, isValueSelected } = this.state;
         if (data === undefined || data.length === 0) {
             return (
-                <div className="dropdown" onFocus={this.onFocus} onBlur={this.onBlur}>
+                <div className={classnames('dropdown')} onFocus={this.onFocus} onBlur={this.onBlur}>
                     <input
                         className={!isValueSelected ? 'dropdown-input' : 'dropdown-input error-input'}
                         autoComplete="off"
@@ -109,7 +110,7 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
         }
         if (data.length > 0) {
             return (
-                <div className="dropdown" onFocus={this.onFocus} onBlur={this.onBlur}>
+                <div className={classnames('dropdown')} onFocus={this.onFocus} onBlur={this.onBlur}>
                     <input
                         className={!isValueSelected ? 'dropdown-input' : 'dropdown-input error-input'}
                         autoComplete="off"
@@ -126,7 +127,7 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
                 </div>
             );
         }
-        return <div className="dropdown" onFocus={this.onFocus} onBlur={this.onBlur} />;
+        return <div className={classnames('dropdown')} onFocus={this.onFocus} onBlur={this.onBlur} />;
     }
 }
 
