@@ -1,7 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var JSonResult = (function () {
-    function JSonResult() {
+    function JSonResult(id, text) {
+        this.id = id;
+        this.text = text;
+        this.selected = false;
     }
     return JSonResult;
 }());

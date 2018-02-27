@@ -44,3 +44,6 @@
     display: block; }
     .dropdown .dropdown-content .dropdown-line .dropdown-line-content:hover:not(.header) {
       background-color: #eee; }
+
+.error-input {
+  border: 1px dashed red; }

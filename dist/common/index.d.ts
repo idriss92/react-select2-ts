@@ -7,6 +7,7 @@ export declare class JSonResult implements IJSonResult {
     id: number;
     text: string;
     selected: boolean;
+    constructor(id: number, text: string);
 }
 export interface ISelect2Properties {
     allowClearButton?: boolean;

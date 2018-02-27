@@ -6,6 +6,11 @@ export class JSonResult implements IJSonResult {
     id: number;
     text: string;
     selected: boolean;
+    constructor(id: number, text: string) {
+        this.id = id;
+        this.text = text;
+        this.selected = false;
+    }
 }
 
 export interface ISelect2Properties {

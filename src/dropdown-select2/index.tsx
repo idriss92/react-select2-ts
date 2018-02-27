@@ -31,7 +31,7 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
         const { loadOptions, minimumInputLength } = this.props;
         const target = event.currentTarget;
         let value: string = target.value;
-        this.setState({ inputValue: value });
+        this.setState({ inputValue: value, isValueSelected: false });
         this.inputThrottler.throttle(() => {
             this.setState({ isLoading: true });
             if (minimumInputLength !== undefined && value.trim().length >= minimumInputLength) {
@@ -73,7 +73,8 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
                                 onMouseDown={this.onClick}
                             >
                                 {item.text}
-                            </a></li>;
+                            </a>
+                        </li>;
                     })}
                 </ul>
             );
@@ -87,12 +88,12 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
 
     render() {
         const { id, placeholder } = this.props;
-        const { data, inputValue } = this.state;
+        const { data, inputValue, isValueSelected } = this.state;
         if (data === undefined || data.length === 0) {
             return (
                 <div className="dropdown" onFocus={this.onFocus} onBlur={this.onBlur}>
                     <input
-                        className="dropdown-input"
+                        className={!isValueSelected ? 'dropdown-input' : 'dropdown-input error-input'}
                         autoComplete="off"
                         autoCapitalize="off"
                         type="text"
@@ -101,6 +102,7 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
                         placeholder={placeholder}
                         value={inputValue}
                         onChange={this.onChangeInput}
+                        required={!isValueSelected}
                     />
                 </div>
             );
@@ -108,17 +110,18 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
         if (data.length > 0) {
             return (
                 <div className="dropdown" onFocus={this.onFocus} onBlur={this.onBlur}>
-                    <input 
-                        className="dropdown-input" 
-                        autoComplete="off" 
-                        autoCapitalize="off" 
-                        placeholder={placeholder} 
-                        name={id} 
-                        id={id} 
-                        type="text" 
+                    <input
+                        className={!isValueSelected ? 'dropdown-input' : 'dropdown-input error-input'}
+                        autoComplete="off"
+                        autoCapitalize="off"
+                        placeholder={placeholder}
+                        name={id}
+                        id={id}
+                        type="text"
                         value={inputValue}
-                        onChange={this.onChangeInput} 
-                        />
+                        onChange={this.onChangeInput}
+                        required={!isValueSelected}
+                    />
                     {this.renderOptions(data)}
                 </div>
             );

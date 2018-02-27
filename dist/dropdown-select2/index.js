@@ -28,7 +28,7 @@ var Select2 = (function (_super) {
         var _a = this.props, loadOptions = _a.loadOptions, minimumInputLength = _a.minimumInputLength;
         var target = event.currentTarget;
         var value = target.value;
-        this.setState({ inputValue: value });
+        this.setState({ inputValue: value, isValueSelected: false });
         this.inputThrottler.throttle(function () {
             _this.setState({ isLoading: true });
             if (minimumInputLength !== undefined && value.trim().length >= minimumInputLength) {
@@ -66,14 +66,14 @@ var Select2 = (function (_super) {
     };
     Select2.prototype.render = function () {
         var _a = this.props, id = _a.id, placeholder = _a.placeholder;
-        var _b = this.state, data = _b.data, inputValue = _b.inputValue;
+        var _b = this.state, data = _b.data, inputValue = _b.inputValue, isValueSelected = _b.isValueSelected;
         if (data === undefined || data.length === 0) {
             return (React.createElement("div", { className: "dropdown", onFocus: this.onFocus, onBlur: this.onBlur },
-                React.createElement("input", { className: "dropdown-input", autoComplete: "off", autoCapitalize: "off", type: "text", name: id, id: id, placeholder: placeholder, value: inputValue, onChange: this.onChangeInput })));
+                React.createElement("input", { className: !isValueSelected ? 'dropdown-input' : 'dropdown-input error-input', autoComplete: "off", autoCapitalize: "off", type: "text", name: id, id: id, placeholder: placeholder, value: inputValue, onChange: this.onChangeInput, required: !isValueSelected })));
         }
         if (data.length > 0) {
             return (React.createElement("div", { className: "dropdown", onFocus: this.onFocus, onBlur: this.onBlur },
-                React.createElement("input", { className: "dropdown-input", autoComplete: "off", autoCapitalize: "off", placeholder: placeholder, name: id, id: id, type: "text", value: inputValue, onChange: this.onChangeInput }),
+                React.createElement("input", { className: !isValueSelected ? 'dropdown-input' : 'dropdown-input error-input', autoComplete: "off", autoCapitalize: "off", placeholder: placeholder, name: id, id: id, type: "text", value: inputValue, onChange: this.onChangeInput, required: !isValueSelected }),
                 this.renderOptions(data)));
         }
         return React.createElement("div", { className: "dropdown", onFocus: this.onFocus, onBlur: this.onBlur });
