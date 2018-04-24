@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Throttler = /** @class */ (function () {
     function Throttler(waitInterval) {
         this.waitInterval = waitInterval;
+        this.timer = 0;
     }
     Throttler.prototype.throttle = function (callback) {
         clearTimeout(this.timer);

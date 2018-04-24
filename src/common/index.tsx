@@ -23,6 +23,7 @@ export interface ISelect2Properties {
     multipleSelection?: boolean;
     language: string;
     required?: boolean;
+    propsValue?: string | number;
     onOptionsClick: (event: React.SyntheticEvent<HTMLAnchorElement>) => void;
     loadOptions: (inputValue: any) => Promise<{data: JSonResult[]}>;
 }
@@ -30,7 +31,7 @@ export interface ISelect2Properties {
 export interface ISelect2State {
     data: JSonResult[];
     isValueSelected: boolean;
-    inputValue: string;
+    inputValue: string | number;
     isLoading: boolean;
     hideUl: boolean;
 

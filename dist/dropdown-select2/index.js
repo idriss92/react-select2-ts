@@ -26,9 +26,10 @@ var Select2 = /** @class */ (function (_super) {
     }
     Select2.prototype.onChangeInput = function (event) {
         var _this = this;
-        var _a = this.props, loadOptions = _a.loadOptions, minimumInputLength = _a.minimumInputLength;
+        var _a = this.props, loadOptions = _a.loadOptions, minimumInputLength = _a.minimumInputLength, propsValue = _a.propsValue;
         var target = event.currentTarget;
-        var value = target.value;
+        var internValue = target.value;
+        var value = internValue || propsValue;
         this.setState({ inputValue: value, isValueSelected: false });
         this.inputThrottler.throttle(function () {
             _this.setState({ isLoading: true });

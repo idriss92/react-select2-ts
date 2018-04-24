@@ -29,9 +29,10 @@ export class Select2 extends React.Component<ISelect2Properties, ISelect2State> 
     }
 
     onChangeInput(event: React.SyntheticEvent<HTMLInputElement>) {
-        const { loadOptions, minimumInputLength } = this.props;
+        const { loadOptions, minimumInputLength, propsValue } = this.props;
         const target = event.currentTarget;
-        let value: string = target.value;
+        let internValue: string | number = target.value;
+        let value: any = internValue || propsValue;
         this.setState({ inputValue: value, isValueSelected: false });
         this.inputThrottler.throttle(() => {
             this.setState({ isLoading: true });

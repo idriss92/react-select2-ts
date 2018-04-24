@@ -4,6 +4,7 @@ export default class Throttler {
 
     constructor(waitInterval: number) {
         this.waitInterval = waitInterval;
+        this.timer = 0;
     }
 
     throttle(callback: () => void) {
